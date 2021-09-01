@@ -1,4 +1,4 @@
-import { Collection, Document, Filter, FindCursor, MongoClient } from 'mongodb';
+import { Collection, Document, Filter, FindCursor, MongoClient, ObjectId } from 'mongodb';
 import { IFilter } from '../models/filter.model';
 
 let restaurants: Collection<Document>;
@@ -15,7 +15,6 @@ export default class RestaurantsDao {
             console.error( `Unable to estabilish a collection handle in restaurantsDAO: ${err}` );
         }
     }
-
     
     static async getRestaurants( filters: IFilter, page = 0, restaurantsPerPage = 20) {
         let query: Filter<Document> = {};
@@ -49,6 +48,59 @@ export default class RestaurantsDao {
         } catch (err) {
             console.error( `Unable to convert cursor to array or problem counting documents, ${err}` );
             return { restaurantsList: [], totalNumRestaurants: 0 };
+        }
+    }
+    
+    static async getRestaurantByID( id: string ) {
+        try { 
+            const pipeline = [
+                { $match : { _id: new ObjectId(id) }},
+                {
+                    $lookup: {
+                        from: "reviews",
+                        let: {
+                            id: "$_id",
+                        },
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: {
+                                        $eq: ["$restaurant_id", "$$id"],
+                                    },
+                                },
+                            },
+                            {
+                                $sort: {
+                                    date: -1,
+                                },
+                            },
+                        ],
+                        as: "reviews",
+                    },
+                },
+                {
+                    $addFields: {
+                        reviews: "$reviews",
+                    },
+                },
+            ];
+
+            return await restaurants.aggregate(pipeline).next();
+        } catch (err) {
+            console.error( `Something went wrong in getRestaurantByID, ${err}` );
+            throw err;
+        }
+    }
+
+    static async getCuisines() {
+        let cuisines = [];
+
+        try {
+            cuisines = await restaurants.distinct('cuisine');
+            return cuisines;
+        } catch (err) {
+            console.error(`Unable to get cuisines, ${err}`);
+            return cuisines;
         }
     }
 }

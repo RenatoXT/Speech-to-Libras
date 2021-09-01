@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { IFilter } from "../models/filter.model";
-import RestaurantsDao from "../dao/restaurants.dao";
+import RestaurantsDao from '../dao/restaurants.dao';
 
 export default class RestaurantsController {
     static async apiGetRestaurants( req: Request, resp: Response, next: NextFunction) {
@@ -32,5 +32,38 @@ export default class RestaurantsController {
         };
         
         resp.json(response);
+    }
+
+    static async apiGetRestaurantsById(req: Request, resp: Response, next: NextFunction) {
+        try {
+            const _id = req.params.id || '';
+            const restaurant = await RestaurantsDao.getRestaurantByID(_id);
+
+            if (!restaurant) {
+                resp.status(404).json({ error: "Not Found" });
+                return ;
+            }
+
+            resp.json(restaurant);
+        } catch (err) {
+            console.log(`api, ${err}`);
+            resp.status(500).json({ error: err });
+        }
+    }
+
+    static async apiGetRestaurantCuisines(req: Request, resp: Response, next: NextFunction) {
+        try {
+            const cuisines = await RestaurantsDao.getCuisines();
+
+            if (!cuisines) {
+                resp.status(404).json({ error: "Not Found" });
+                return ;
+            }
+
+            resp.json(cuisines);
+        } catch (err) {
+            console.log(`api, ${err}`);
+            resp.status(500).json({ error: err });
+        }
     }
 }
