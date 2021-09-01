@@ -12,7 +12,8 @@ app.use(morgan('dev'));
 
 app.use("/api/v1/restaurants", restaurants);
 
-app.use("*", (resp: Response, req: Request) => {
+app.use("*", (req: Request, resp: Response) => {
+    console.log(resp)
     resp.status(404).json({ error: "Rota não encontrada!"});
 });
 

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import Path from 'path';
 
 import RestaurantsDao  from './dao/restaurants.dao';
+import ReviewsDao from './dao/reviews.dao';
 
 const env = dotenv.config({ path: Path.join(__dirname, '/configs/.env') });
 
@@ -24,6 +25,7 @@ client.connect()
     })
     .then(async client => {
         await RestaurantsDao.injectDB(client);
+        await ReviewsDao.injectDB(client);
 
         app.listen(port, () => {
             console.log(`:::listening on port ${port}`);

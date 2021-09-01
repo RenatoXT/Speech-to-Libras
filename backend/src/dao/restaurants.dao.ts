@@ -1,5 +1,5 @@
 import { Collection, Document, Filter, FindCursor, MongoClient } from 'mongodb';
-import { IFilter } from '../../models/filter.model';
+import { IFilter } from '../models/filter.model';
 
 let restaurants: Collection<Document>;
 
@@ -12,9 +12,7 @@ export default class RestaurantsDao {
         try {
             restaurants = await conn.db(process.env.RESTREVIEWS_NS).collection("restaurants")
         } catch( err) {
-            console.error(
-                `Unable to estabilish a collection handle in restaurantsDAO: ${err}`
-            );
+            console.error( `Unable to estabilish a collection handle in restaurantsDAO: ${err}` );
         }
     }
 
@@ -49,9 +47,7 @@ export default class RestaurantsDao {
 
             return { restaurantsList, totalNumRestaurants };
         } catch (err) {
-            console.error(
-                `Unable to convert cursor to array or problem counting documents, ${err}`
-            );
+            console.error( `Unable to convert cursor to array or problem counting documents, ${err}` );
             return { restaurantsList: [], totalNumRestaurants: 0 };
         }
     }

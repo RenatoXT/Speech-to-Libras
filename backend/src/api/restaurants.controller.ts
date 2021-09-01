@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { IFilter } from "../../models/filter.model";
+import { IFilter } from "../models/filter.model";
 import RestaurantsDao from "../dao/restaurants.dao";
 
 export default class RestaurantsController {
     static async apiGetRestaurants( req: Request, resp: Response, next: NextFunction) {
-        const _restaurantsPerPage  = req.query.restaurantsPerPage?.toString() || '';
-        const _page  = req.query.page?.toString() || '';
+        const _restaurantsPerPage  = req.query.restaurantsPerPage || '';
+        const _page  = req.query.page || '';
         const _cuisine  = req.query.cuisine?.toString() || '';
         const _zipcode  = req.query.zipcode?.toString() || '';
         const _name  = req.query.name?.toString() || '';
