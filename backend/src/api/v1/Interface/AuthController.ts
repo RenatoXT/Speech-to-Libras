@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { AbstractRouteController } from "../../../routes/AbstractRouteController";
 
 import { generateSignInUrl, getGoogleAccountFromCode } from "../../../utils/google/google-utils";
+import UsersDao from "../Data/mongo/users.dao";
+import { MongoUser } from "../Entities/mongoUser.model";
 
 export class AuthController extends AbstractRouteController {
     constructor() {
@@ -46,10 +48,18 @@ export class AuthController extends AbstractRouteController {
         } else {
             code = code ? code.toString() : "" ;
             
-            getGoogleAccountFromCode(code).then((result) => {
+            getGoogleAccountFromCode(code).then(async (result) => {
                 if ( result ) {
                     const userInfo = result;
                     const userData = userInfo.user;
+
+                    const saveUser = new MongoUser();
+                    saveUser.assignGoogleResultValues(userData);
+
+                    const usersDB = new UsersDao();
+                    const dbResult = await usersDB.createUser(saveUser);
+
+                    console.log(dbResult)
 
                     // TODO Salvar os dados do usuário no bd (userData)
                     // TODO Fazer a gestão de acesso através do token

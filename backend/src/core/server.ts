@@ -1,3 +1,4 @@
+import { InitializeDB } from './../db/InitializeDB';
 import express, { Express } from 'express';
 
 import Config from '../constants/constants';
@@ -13,11 +14,12 @@ export async function server() {
     await InitializeMiddleware.InitializeCommonMiddleware(app);
     await InitializeRoutes.Initialize(app);
     // await InitializeMiddleware.InitializeErrorHandlingMiddleware(app);
+    await InitializeDB.initalize()
 
     const server = app.listen(port, () => {
         console.log(
             `Server  started listening on ${port} port.`
-        )
+        );
     });
 
     process.on("SIGINT", () => {

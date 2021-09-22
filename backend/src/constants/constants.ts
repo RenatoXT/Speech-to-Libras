@@ -16,4 +16,22 @@ export default class Config {
         ClientSecret : process.env.ClientSecret,
         ClientRedirect : process.env.ClientRedirect,
     }
+
+    public static STLVIEWS_NS = process.env.STLVIEWS_NS || "";
+    public static STLVIEWS_DB_URI = this.generateDbUri();
+
+    private static generateDbUri() {
+        const STLUSER = process.env.STLUSER || "";
+        const STLPASS = process.env.STLPASS || "";
+        const STLCLUSTER = process.env.STLCLUSTER || "";
+
+        let dbUri = process.env.STLVIEWS_DB_URI || "";
+
+        dbUri = dbUri.replace("${STLVIEWS_NS}", Config.STLVIEWS_NS);
+        dbUri = dbUri.replace("${STLUSER}", STLUSER);
+        dbUri = dbUri.replace("${STLPASS}", STLPASS);
+        dbUri = dbUri.replace("${STLCLUSTER}", STLCLUSTER);
+
+        return dbUri;
+    }
 }
