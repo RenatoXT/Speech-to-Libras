@@ -1,5 +1,4 @@
 import { google } from "googleapis";
-import { OAuth2Client } from "googleapis-common";
 import { createConnection } from "./configs/OAuth";
 import GoogleMetadata from "./configs/Metadata";
 import { IUser } from "./entities/IUser";
@@ -8,9 +7,16 @@ import { IUser } from "./entities/IUser";
  * Create the google url to be sent to the client.
  */
 export function generateSignInUrl(): string {
-  const auth = createConnection();
-  const url = auth.generateAuthUrl(GoogleMetadata.PERMISSION);
-  return url;
+  try {
+    const auth = createConnection();
+    const url = auth.generateAuthUrl(GoogleMetadata.PERMISSION);
+
+    return url;
+
+  } catch (err) {
+    // console.error(err);
+    throw err;
+  }
 }
 
 /**
@@ -48,8 +54,9 @@ export async function getGoogleAccountFromCode(code: string) {
       tokens: tokens, // you can save these to the user if you ever want to get their details without making them log in again
     };
   } catch (err) {
-    // console.error(err);
-    throw err;
+    return {
+      error : err
+    }
   }
 
 }

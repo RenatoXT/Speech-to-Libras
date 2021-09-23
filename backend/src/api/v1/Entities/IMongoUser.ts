@@ -4,7 +4,8 @@ export interface IMongoUser {
   name: INames;
   gender: string;
   language: string;
-  avatar: IAvatar
+  avatar: IAvatar;
+  origin: string
 };
 
 export interface IAvatar {

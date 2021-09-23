@@ -56,17 +56,25 @@ export class AuthController extends AbstractRouteController {
                     const saveUser = new MongoUser();
                     saveUser.assignGoogleResultValues(userData);
 
-                    const usersDB = new UsersDao();
-                    const dbResult = await usersDB.createUser(saveUser);
+                    if ( saveUser.email ) {
+                        const usersDB = new UsersDao();
+                        const dbResult = await usersDB.createUser(saveUser);
 
-                    console.log(dbResult)
+                        if (( dbResult as any).error) {
+                            resp.status(206).json(dbResult);
+                        } else {
+                            resp.status(201).json({ 
+                                msg: `IH ALA, A WILD ${userData?.names?.givenName} APPEARED`
+                            });
+                        }
+                    } else {
+                        resp.status(206).json({ error: "Usuário com dados inválidos"})
+                    }
+
 
                     // TODO Salvar os dados do usuário no bd (userData)
                     // TODO Fazer a gestão de acesso através do token
                     
-                    resp.status(201).json({ 
-                        msg: `IH ALA, A WILD ${userData.names?.givenName} APPEARED`
-                    });
                 } else {
                     throw("User not authenticated");
                 }

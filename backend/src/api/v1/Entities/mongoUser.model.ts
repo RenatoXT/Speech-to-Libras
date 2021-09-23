@@ -6,6 +6,7 @@ export class MongoUser implements IMongoUser {
   name: INames;
   gender: string;
   language: string;
+  origin: string;
   avatar: IAvatar;
   
   constructor() {
@@ -13,6 +14,7 @@ export class MongoUser implements IMongoUser {
     this.photoUrl = ""
     this.gender = ""
     this.language = ""
+    this.origin = ""
     this.name = {
       displayName: "",
       familyName: "",
@@ -34,16 +36,17 @@ export class MongoUser implements IMongoUser {
   }
 
   public assignGoogleResultValues(params: any) {
-    this.email = params.emailAddresses.value;
-    this.photoUrl = params.photos.url;
-    this.gender = params.genders.value;
+    this.email = params?.emailAddresses?.value || this.email;
+    this.photoUrl = params?.photos?.url || this.photoUrl;
+    this.gender = params?.genders?.value || this.gender;
     this.name = {
-      displayName: params.names.displayName,
-      familyName: params.names.familyName,
-      givenName: params.names.givenName,
+      displayName: params?.names?.displayName || this.name.displayName,
+      familyName: params?.names?.familyName || this.name.familyName,
+      givenName: params?.names?.givenName || this.name.givenName,
     };
-    this.language = params.language || this.language;
-    this.avatar = params.avatar || this.avatar;
+    this.language = params?.language || this.language;
+    this.avatar = params?.avatar || this.avatar;
+    this.origin = "google"
   }
 
 };

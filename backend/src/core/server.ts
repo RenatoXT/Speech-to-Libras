@@ -22,9 +22,4 @@ export async function server() {
         );
     });
 
-    process.on("SIGINT", () => {
-        server.close();
-        console.log("App finalizado");
-    })
-
 }
