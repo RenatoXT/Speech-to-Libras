@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { AbstractRouteController } from "../../../routes/AbstractRouteController";
 
-import UsersDao from "../Data/mongo/users.dao";
 import { UserService } from "../Service/UserService";
 
 export class UserController extends AbstractRouteController {

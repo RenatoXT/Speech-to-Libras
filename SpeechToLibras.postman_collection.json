@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "85722b4c-fbae-47e0-951e-1dcacdaec120",
+		"name": "SpeechToLibras",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Buscar Usuário",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/renatoxaviertavares1999@gmail.com",
+							"protocol": "https",
+							"host": [
+								"speech-to-libras",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"SpeechToLibras",
+								"v1",
+								"User",
+								"renatoxaviertavares1999@gmail.com"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"renatoxaviertavares1999@gmail.com\",\r\n        \"origin\": \"google\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/",
+							"protocol": "https",
+							"host": [
+								"speech-to-libras",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"SpeechToLibras",
+								"v1",
+								"User",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/renatoxaviertavares1999@gmail.com",
+							"protocol": "https",
+							"host": [
+								"speech-to-libras",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"SpeechToLibras",
+								"v1",
+								"User",
+								"renatoxaviertavares1999@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GoogleAuth",
+			"item": [
+				{
+					"name": "Sign-in Google",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/Auth/",
+							"protocol": "https",
+							"host": [
+								"speech-to-libras",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"SpeechToLibras",
+								"v1",
+								"Auth",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
