@@ -12,8 +12,8 @@ export class AuthService {
      public googleAuth(req: Request, resp: Response) {
         const url = generateSignInUrl();
 
-        resp.status(201).json({ 
-            error: "Usuário não logado, necessário fazer login para acessar",
+        resp.status(401).json({ 
+            error: "Realize o login para acessar",
             url
         });
     }
@@ -25,7 +25,7 @@ export class AuthService {
         let { code } = req.query;
         
         if ( !code ) {
-            resp.status(401).json({ error: "User not authenticated "})
+            resp.status(401).json({ error: "Usuário não autenticado "})
         } else {
             code = code ? code.toString() : "" ;
             
@@ -42,14 +42,14 @@ export class AuthService {
                         const dbResult = await usersDB.createUser(saveUser);
 
                         if (( dbResult as any).error) {
-                            resp.status(206).json(dbResult);
+                            resp.status(406).json(dbResult);
                         } else {
                             resp.status(201).json({ 
                                 msg: `Bem vind@ ao speech to libras, ${userData?.names?.givenName}`
                             });
                         }
                     } else {
-                        resp.status(206).json({ error: "Usuário com dados inválidos"})
+                        resp.status(406).json({ error: "Usuário com dados inválidos"})
                     }
 
 
@@ -57,7 +57,7 @@ export class AuthService {
                     // TODO Fazer a gestão de acesso através do token
                     
                 } else {
-                    throw("User not authenticated");
+                    throw("Usuário não autenticado");
                 }
             });
         }

@@ -14,8 +14,8 @@ export class UserService {
 
             resp.status(200).json(user);
         } else {
-            resp.status(201).json({ 
-                error: "Usuário não cadastrado, necessário fazer login para acessar",
+            resp.status(401).json({ 
+                error: "Usuário não cadastrado",
             });
         }
         
@@ -30,8 +30,8 @@ export class UserService {
 
             resp.json(updatedUser);
         } else {
-            resp.status(201).json({ 
-                error: "Usuário não cadastrado, necessário fazer login para acessar",
+            resp.status(401).json({ 
+                error: "Usuário não cadastrado",
             });
         }
         
@@ -46,8 +46,8 @@ export class UserService {
 
             resp.status(200).json(user);
         } else {
-            resp.status(201).json({ 
-                error: "Usuário não cadastrado, necessário fazer login para acessar",
+            resp.status(401).json({ 
+                error: "Usuário não cadastrado",
             });
         }
         
