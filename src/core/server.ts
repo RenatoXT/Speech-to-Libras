@@ -16,7 +16,7 @@ export async function server() {
     // await InitializeMiddleware.InitializeErrorHandlingMiddleware(app);
     await InitializeDB.initalize()
 
-    const server = app.listen(port, () => {
+    app.listen(port, () => {
         console.log(
             `Server  started listening on ${port} port.`
         );

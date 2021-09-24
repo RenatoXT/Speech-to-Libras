@@ -1,5 +1,6 @@
-import { UserController } from './Interface/UserController';
 import { AbstractRouteController } from "../../routes/AbstractRouteController";
+
+import { UserController } from './Interface/UserController';
 import { AuthController } from "./Interface/AuthController";
 
 

@@ -5,10 +5,15 @@ import { generateSignInUrl, getGoogleAccountFromCode } from "../../../utils/goog
 import UsersDao from "../Data/mongo/users.dao";
 import { MongoUser } from "../Entities/mongoUser.model";
 
+import { AuthService } from "../Service/AuthService";
+
 export class AuthController extends AbstractRouteController {
+    private _service: AuthService;
+
     constructor() {
         super();
         this.path += "/Auth";
+        this._service = new AuthService();
         this.InitializeController();
     }
 
@@ -18,67 +23,10 @@ export class AuthController extends AbstractRouteController {
     }
 
     public async InitializeGetGoogle() {
-        this.router.get(this.path, this.googleAuth).bind(this);
+        this.router.get(this.path, this._service.googleAuth).bind(this);
     }
 
     public async InitializeResultGoogle() {
-        this.router.get(this.path + "/GoogleAuth", this.googleAuthResult).bind(this);
-    }
-
-    /**
-     * Generate a sign-in url for google access
-     */
-    private googleAuth = (req: Request, resp: Response) => {
-        const url = generateSignInUrl();
-
-        resp.status(201).json({ 
-            error: "Usuário não logado, necessário fazer login para acessar",
-            url
-        });
-    }
-
-    /**
-     * gets the google sign-in result and get the user data from google api's
-     */
-    private googleAuthResult = async (req: Request, resp: Response) => {
-        let { code } = req.query;
-        
-        if ( !code ) {
-            resp.status(401).json({ error: "User not authenticated "})
-        } else {
-            code = code ? code.toString() : "" ;
-            
-            getGoogleAccountFromCode(code).then(async (result) => {
-                if ( result ) {
-                    const userInfo = result;
-                    const userData = userInfo.user;
-
-                    const saveUser = new MongoUser();
-                    saveUser.assignGoogleResultValues(userData);
-
-                    if ( saveUser.email ) {
-                        const usersDB = new UsersDao();
-                        const dbResult = await usersDB.createUser(saveUser);
-
-                        if (( dbResult as any).error) {
-                            resp.status(206).json(dbResult);
-                        } else {
-                            resp.status(201).json({ 
-                                msg: `IH ALA, A WILD ${userData?.names?.givenName} APPEARED`
-                            });
-                        }
-                    } else {
-                        resp.status(206).json({ error: "Usuário com dados inválidos"})
-                    }
-
-
-                    // TODO Salvar os dados do usuário no bd (userData)
-                    // TODO Fazer a gestão de acesso através do token
-                    
-                } else {
-                    throw("User not authenticated");
-                }
-            });
-        }
+        this.router.get(this.path + "/GoogleAuth", this._service.googleAuthResult).bind(this);
     }
 }
