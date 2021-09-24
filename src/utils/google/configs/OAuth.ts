@@ -2,9 +2,9 @@ import { google } from 'googleapis';
 import Config from '../../../constants/constants';
 
 const googleConfig = {
-  clientId: Config.GoogleConfig.ClientId, // e.g. asdfghjkljhgfdsghjk.apps.googleusercontent.com
-  clientSecret: Config.GoogleConfig.ClientSecret, // e.g. _ASDFA%DFASDFASDFASD#FAD-
-  redirect: Config.GoogleConfig.ClientRedirect // this must match your google api settings
+  clientId: Config.GoogleConfig.ClientId, 
+  clientSecret: Config.GoogleConfig.ClientSecret, 
+  redirect: Config.GoogleConfig.ClientRedirect
 };
 
 /**

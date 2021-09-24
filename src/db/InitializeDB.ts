@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import { Express } from 'express';
 
 import UsersDao from '../api/v1/Data/mongo/users.dao';
 
