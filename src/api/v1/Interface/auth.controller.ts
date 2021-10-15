@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { AbstractRouteController } from "../../../routes/AbstractRouteController";
+import { AbstractRouteController } from "../../../routes/abstract-route.controller";
 
 import { generateSignInUrl, getGoogleAccountFromCode } from "../../../utils/google/google-utils";
 import UsersDao from "../Data/mongo/users.dao";
-import { MongoUser } from "../Entities/mongoUser.model";
+import { MongoUser } from "../Entities/mongo-user.model";
 
-import { AuthService } from "../Service/AuthService";
+import { AuthService } from "../Service/auth.service";
 
 export class AuthController extends AbstractRouteController {
     private _service: AuthService;

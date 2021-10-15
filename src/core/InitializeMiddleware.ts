@@ -1,6 +1,6 @@
 import { Express } from 'express';
-import { CommonMiddleware  } from '../middlewares/CommonMiddleware';
-import { ErrorHandlingMiddleware } from '../middlewares/ErrorHandlingMiddleware';
+import { CommonMiddleware  } from '../middlewares/common.middleware';
+import { ErrorHandlingMiddleware } from '../middlewares/error-handling.middleware';
 
 export class InitializeMiddleware {
     

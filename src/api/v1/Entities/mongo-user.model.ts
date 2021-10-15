@@ -1,4 +1,4 @@
-import { IAvatar, IMongoUser, INames } from "./IMongoUser";
+import { IAvatar, IMongoUser, INames } from "./mongo-user.interface";
 
 export class MongoUser implements IMongoUser {
   email: string;

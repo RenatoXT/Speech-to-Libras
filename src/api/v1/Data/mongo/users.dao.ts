@@ -1,6 +1,6 @@
 import { Collection, Document, Filter, FindCursor, MongoClient, ObjectId } from 'mongodb';
-import { IMongoUser } from '../../Entities/IMongoUser';
-import { MongoUser } from '../../Entities/mongoUser.model';
+import { IMongoUser } from '../../Entities/mongo-user.interface';
+import { MongoUser } from '../../Entities/mongo-user.model';
 
 let users: Collection<Document>;
 

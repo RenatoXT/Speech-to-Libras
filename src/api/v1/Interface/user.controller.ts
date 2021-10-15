@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { AbstractRouteController } from "../../../routes/AbstractRouteController";
+import { AbstractRouteController } from "../../../routes/abstract-route.controller";
 
-import { UserService } from "../Service/UserService";
+import { UserService } from "../Service/user.service";
 
 export class UserController extends AbstractRouteController {
     

@@ -1,6 +1,6 @@
 import { Express } from 'express';
 import { getAllRoutes } from '../api/v1/index'
-import { AbstractRouteController } from '../routes/AbstractRouteController';
+import { AbstractRouteController } from '../routes/abstract-route.controller';
 
 export class InitializeRoutes {
     public static async Initialize(app: Express){
