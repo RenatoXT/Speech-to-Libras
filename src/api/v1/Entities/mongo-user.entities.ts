@@ -1,6 +1,26 @@
-import { IAvatar, IMongoUser, INames } from "./mongo-user.interface";
+import { AbstractModel } from "../../../db/collection-model.entity";
 
-export class MongoUser implements IMongoUser {
+export interface IMongoUser {
+  email: string;
+  photoUrl: string;
+  name: INames;
+  gender: string;
+  language: string;
+  avatar: IAvatar;
+  origin: string
+};
+
+export interface IAvatar {
+  code: number
+};
+
+export interface INames {
+  displayName: string;
+  familyName: string;
+  givenName: string;
+};
+
+export class MongoUser extends AbstractModel implements IMongoUser  {
   email: string;
   photoUrl: string;
   name: INames;
@@ -10,6 +30,7 @@ export class MongoUser implements IMongoUser {
   avatar: IAvatar;
   
   constructor() {
+    super();
     this.email = ""
     this.photoUrl = ""
     this.gender = ""
@@ -23,16 +44,6 @@ export class MongoUser implements IMongoUser {
     this.avatar = {
       code: 0
     }
-  }
-
-  public assignValues(params: any) {
-    const listKeys = Object.keys(this);
-
-    listKeys.map( paramKey => {
-      if (params[paramKey] !== undefined) {
-        (this as any)[paramKey] = params[paramKey];
-      }
-    });
   }
 
   public assignGoogleResultValues(params: any) {

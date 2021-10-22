@@ -2,6 +2,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { Express, json } from 'express';
 
+const fileUpload = require("express-fileupload")
+
 
 export class CommonMiddleware {
     app: Express;
@@ -20,6 +22,16 @@ export class CommonMiddleware {
 
     public async logRequests() {
         this.app.use(morgan('tiny'))
+    }
+
+    public async templateEngine() {
+        this.app.set("view engine", "ejs");
+    }
+
+    public async useFileUpload() {
+        this.app.use(fileUpload({
+            crateParentPath: true
+        }))
     }
 
 }

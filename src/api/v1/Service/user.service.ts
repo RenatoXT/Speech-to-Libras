@@ -9,8 +9,7 @@ export class UserService {
         const { email } = req.params;
 
         if ( email ) {
-            const usersDB = new UsersDao()
-            const user = await usersDB.searchUser(email.toString());
+            const user = await UsersDao.getUser(email.toString());
 
             resp.status(200).json(user);
         } else {
@@ -25,8 +24,7 @@ export class UserService {
         const { user } = req.body;
 
         if ( user ) {
-            const usersDB = new UsersDao()
-            const updatedUser = await usersDB.updateUser(user);
+            const updatedUser = await UsersDao.updateUser(user);
 
             resp.json(updatedUser);
         } else {
@@ -41,8 +39,7 @@ export class UserService {
         const { email } = req.params;
 
         if ( email ) {
-            const usersDB = new UsersDao()
-            const user = await usersDB.deleteUser(email.toString());
+            const user = await UsersDao.deleteUser(email.toString());
 
             resp.status(200).json(user);
         } else {

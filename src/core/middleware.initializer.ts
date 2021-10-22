@@ -9,7 +9,10 @@ export class InitializeMiddleware {
         
         await middleware.useJson();
         await middleware.useCors();
+        await middleware.useFileUpload();
+        await middleware.logRequests();
         // await middleware.logRequests();
+        await middleware.templateEngine();
     }
     
     public static async InitializeErrorHandlingMiddleware(app: Express) {

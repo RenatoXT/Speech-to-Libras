@@ -1,6 +1,5 @@
 import { Collection, Document, Filter, FindCursor, MongoClient, ObjectId } from 'mongodb';
-import { IMongoUser } from '../../Entities/mongo-user.interface';
-import { MongoUser } from '../../Entities/mongo-user.model';
+import { MongoUser, IMongoUser } from '../../Entities/mongo-user.entities';
 
 let users: Collection<Document>;
 
@@ -18,7 +17,7 @@ export default class UsersDao {
         }
     }
     
-    public async createUser( params: IMongoUser) {
+    public static async createUser( params: IMongoUser) {
         try {
             const newUser = new MongoUser();
             newUser.assignValues(params);
@@ -33,7 +32,6 @@ export default class UsersDao {
                     error: "Usuário já cadastrado!"
                 }
             }
-            console.log(result)
             return result;
         } catch (err) {
             const msg = (err as Error).message;
@@ -41,7 +39,22 @@ export default class UsersDao {
         }
     }
 
-    public async searchUser( email: string ) {
+    public static async getUser( email: string ) {
+        const searchRes = this.searchUser(email);
+        let result;
+
+        if ( searchRes == null || searchRes ) {
+            result =  {
+                error: "Usuário não encontrado!"
+            }
+        } else {
+            result = searchRes;
+        }
+
+        return result;
+    }
+
+    private static async searchUser( email: string ) {
         try {
             let result = await users.findOne({ "email": email });
             return result;
@@ -51,7 +64,7 @@ export default class UsersDao {
         }
     }
 
-    public async updateUser( params: IMongoUser) {
+    public static async updateUser( params: IMongoUser) {
         try {
             let result;
             let findUser = await this.searchUser(params.email);
@@ -79,7 +92,7 @@ export default class UsersDao {
         }
     }
 
-    public async deleteUser( email: string ) {
+    public static async deleteUser( email: string ) {
         try {
             let result;
             let findUser = await this.searchUser(email);

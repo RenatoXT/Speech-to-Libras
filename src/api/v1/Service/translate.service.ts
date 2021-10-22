@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { LibrasService } from "./libras.service";
+
 const translate = require('translate-google');
 const languages = require('translate-google');
 
@@ -27,24 +29,35 @@ export class TranslateService {
     }
 
     private static async translateText(from: string, to: string, text: string) {
+
+        let resp: any = {
+            code: 200,
+            message: {
+                from,
+                to,
+                text,
+                translated: ""
+            }
+        };
+
         if ( to !== "pt-libras" ) {
             translate( text, {from, to}).then((res: any) => {
-                const response = {
-                    code: 200,
-                    message: {
-                        from,
-                        to,
-                        text,
-                        translated: res
-                    }
-                };
 
-                return response;
+                resp.message.translated = res;
 
                 
+                return resp;
             }).catch((err: any) => {
                 return err;
             })
+        } else if (to === "pt-libras"){
+            const responseLibras = await LibrasService.textToLibras(text);
+
+            if ( responseLibras.code === 200 ) {
+                resp.message.translated = responseLibras.message;
+            }
+
+            return resp
         }
 
         return {

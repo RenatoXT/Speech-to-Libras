@@ -3,7 +3,7 @@ import { AbstractRouteController } from "../../../routes/abstract-route.controll
 
 import { generateSignInUrl, getGoogleAccountFromCode } from "../../../utils/google/google-utils";
 import UsersDao from "../Data/mongo/users.dao";
-import { MongoUser } from "../Entities/mongo-user.model";
+import { MongoUser } from "../Entities/mongo-user.entities";
 
 import { AuthService } from "../Service/auth.service";
 

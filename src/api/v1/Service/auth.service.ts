@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { generateSignInUrl, getGoogleAccountFromCode } from "../../../utils/google/google-utils";
 
 import UsersDao from "../Data/mongo/users.dao";
-import { MongoUser } from "../Entities/mongo-user.model";
+import { MongoUser } from "../Entities/mongo-user.entities";
 
 export class AuthService {
     /**
@@ -38,8 +38,7 @@ export class AuthService {
                     saveUser.assignGoogleResultValues(userData);
 
                     if ( saveUser.email ) {
-                        const usersDB = new UsersDao();
-                        const dbResult = await usersDB.createUser(saveUser);
+                        const dbResult = await UsersDao.createUser(saveUser);
 
                         if (( dbResult as any).error) {
                             resp.status(406).json(dbResult);

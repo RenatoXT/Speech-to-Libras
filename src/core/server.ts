@@ -3,7 +3,7 @@ import express, { Express } from 'express';
 
 import Config from '../constants/constants';
 
-import { InitializeMiddleware } from './InitializeMiddleware';
+import { InitializeMiddleware } from './middleware.initializer';
 import { InitializeRoutes } from './InitializeRoutes ';
 
 export async function server() {
