@@ -55,7 +55,7 @@ npm install
 ```sh
 npm run dev
 ```
-1. Enjoy
+4. Enjoy
 
 ### Others
 application running on:
