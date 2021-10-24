@@ -59,7 +59,12 @@ npm run dev
 
 ### Others
 application running on:
-https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/
+  -  Prod: 
+       https://speech-to-libras-api-prod.herokuapp.com/
+  -  Staging:
+       https://speech-to-libras-api-staging.herokuapp.com/
+  -  Develop:
+       https://speech-to-libras-api-develop.herokuapp.com/
 
 <!-- Authors -->
 ## Authors
@@ -71,4 +76,4 @@ Lucas Araújo Veloso
 Davi Oliveira Chagas Almeida
 <br>
 
-Project Link: [Speech to Libras](https://github.com/RenatoXT/Speech-to-Libras)
+Project Link: [Speech to Libras Backend](https://github.com/RenatoXT/Speech-to-Libras-Backend)
