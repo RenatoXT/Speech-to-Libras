@@ -1,4 +1,4 @@
-import { AbstractModel } from "../../../db/collection-model.entity";
+import { AbstractModel } from "../../../db/abstract-model.entity";
 
 export interface IMongoUser {
   email: string;

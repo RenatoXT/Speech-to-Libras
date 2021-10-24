@@ -1,4 +1,4 @@
-import { AbstractRouteController } from "../../../routes/abstract-route.controller";
+import { AbstractRouteController } from "../../../routes/abstract-route.entity";
 import LibrasTranslateDao from "../Data/mongo/libras-translate.dao";
 import { LibrasService } from "../Service/libras.service";
 

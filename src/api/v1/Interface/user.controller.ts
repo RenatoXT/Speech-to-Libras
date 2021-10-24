@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AbstractRouteController } from "../../../routes/abstract-route.controller";
+import { AbstractRouteController } from "../../../routes/abstract-route.entity";
 
 import { UserService } from "../Service/user.service";
 

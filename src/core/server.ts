@@ -1,10 +1,10 @@
-import { InitializeDB } from './../db/InitializeDB';
+import { InitializeDB } from '../db/database.initializer';
 import express, { Express } from 'express';
 
 import Config from '../constants/constants';
 
 import { InitializeMiddleware } from './middleware.initializer';
-import { InitializeRoutes } from './InitializeRoutes ';
+import { InitializeRoutes } from './routes.initializer';
 
 export async function server() {
     let app: Express = express();

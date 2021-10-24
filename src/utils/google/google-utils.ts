@@ -2,7 +2,7 @@ import { google } from "googleapis";
 import { createConnection } from "./configs/OAuth";
 
 import GoogleMetadata from "./configs/Metadata";
-import { IUser } from "./entities/IUser";
+import { IUser } from "./entities/google-user.entities";
 
 /**
  * Create the google url to be sent to the client.

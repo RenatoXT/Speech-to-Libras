@@ -1,4 +1,4 @@
-import { AbstractRouteController } from "../../routes/abstract-route.controller";
+import { AbstractRouteController } from "../../routes/abstract-route.entity";
 
 import { UserController } from './Interface/user.controller';
 import { AuthController } from "./Interface/auth.controller";
