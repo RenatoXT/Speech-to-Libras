@@ -23,6 +23,6 @@ export class TranslateController extends AbstractRouteController {
     }
 
     public async InitializeGet() {
-        this.router.get(this.path, this._service.validLangs).bind(this);
+        this.router.get(this.path + "/Languages", this._service.validLangs).bind(this);
     }
 }

@@ -25,7 +25,7 @@ export default class UsersDao {
             let findUser = await this.searchUser(params.email);
             let result;
 
-            if ( findUser == null || !findUser ){
+            if ( findUser == null ){
                 result = await users.insertOne(newUser);
             } else {
                 result =  {
@@ -43,7 +43,7 @@ export default class UsersDao {
         const searchRes = this.searchUser(email);
         let result;
 
-        if ( searchRes == null || searchRes ) {
+        if ( searchRes == null ) {
             result =  {
                 error: "Usuário não encontrado!"
             }

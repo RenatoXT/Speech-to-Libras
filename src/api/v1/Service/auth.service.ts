@@ -54,6 +54,7 @@ export class AuthService {
 
                     // TODO Salvar os dados do usuário no bd (userData)
                     // TODO Fazer a gestão de acesso através do token
+                    // TODO inserir a padronização do retorno
                     
                 } else {
                     throw("Usuário não autenticado");

@@ -15,13 +15,14 @@ export class LibrasTranslateController extends AbstractRouteController {
 
     public async InitializeController() {
         await this.InitializeGetTranslateRef();
+        await this.InitializePutTranslateRef();
         await this.InitializePostTranslateRef();
         await this.InitializeDeleteTranslateRef();
     }
 
     public async InitializeGetTranslateRef() {
         this.router.get(
-            this.path + "/file/:name", 
+            this.path + "/sign/:name", 
             this._service.getSign).bind(this);
     }
     
@@ -30,10 +31,16 @@ export class LibrasTranslateController extends AbstractRouteController {
             this.path + "/new/sign",  
             this._service.uploadSign).bind(this);
     }
+    
+    public async InitializePutTranslateRef() {
+        this.router.put(
+            this.path + "/sign/:name",  
+            this._service.updateSign).bind(this);
+    }
 
     public async InitializeDeleteTranslateRef() {
         this.router.delete(
-            this.path + "/file/:name", 
+            this.path + "/sign/:name", 
             this._service.deleteSign).bind(this);
     }
 

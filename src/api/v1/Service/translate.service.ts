@@ -1,98 +1,99 @@
+import { ITranslate } from './../Entities/response.entities';
 import { Request, Response } from "express";
 import { LibrasService } from "./libras.service";
 
-const translate = require('translate-google');
-const languages = require('translate-google');
+import { ILanguageList, IResp } from "../Entities/response.entities"
 
-interface ILanguageList {
-    id: string,
-    value: string
-}
+const translate = require("translate-google");
+const languages = require("translate-google");
 
 export class TranslateService {
-
-    public async translateTo(req: Request, resp: Response) {
-        let { from, to, text } = req.body;
-        
-        if ( !(from && to && text) ) {
-            resp.status(401).json({ error: "Parâmetros Inválidos"})
-        } else {
-            from = from ? from.toString() : "" ;
-            to = to ? to.toString() : "" ;
-            text = text ? text.toString() : "" ;
-
-            const result = await TranslateService.translateText(from, to, text);
-
-            resp.status(result.code).json(result)
-            
-        }
+  public async translateTo(req: Request, resp: Response) {
+    let { from, to, text } = req.body;
+    let response: IResp = {
+      code: 401,
+      data: { error: "Sign not found" },
     }
 
-    private static async translateText(from: string, to: string, text: string) {
+    if (!(from && to && text)) {
+      resp.status(401).json({ error: "Parâmetros Inválidos" });
+    } else {
+      from = from ? from.toString().toLowerCase() : "";
+      to = to ? to.toString().toLowerCase() : "";
+      text = text ? text.toString() : "";
 
-        let resp: any = {
-            code: 200,
-            message: {
-                from,
-                to,
-                text,
-                translated: ""
-            }
-        };
+      response = await TranslateService.translateText(from, to, text);
 
-        if ( to !== "pt-libras" ) {
-            translate( text, {from, to}).then((res: any) => {
+      resp.status(response.code).json(response.data);
+    }
+  }
 
-                resp.message.translated = res;
-
-                
-                return resp;
-            }).catch((err: any) => {
-                return err;
-            })
-        } else if (to === "pt-libras"){
-            const responseLibras = await LibrasService.textToLibras(text);
-
-            if ( responseLibras.code === 200 ) {
-                resp.message.translated = responseLibras.message;
-            }
-
-            return resp
-        }
-
-        return {
-            code: 406,
-            message: "Not a valid language"
-        };
+  private static async translateText(from: string, to: string, text: string) {
+    let response: IResp = {
+      code: 200,
+      data: {
+        from,
+        to,
+        text,
+        translated: "",
+      } as ITranslate,
     }
 
-    public async validLangs(req: Request, resp: Response) {
-        
-        let langsTo : ILanguageList[] = [];
-        const langsFrom : ILanguageList[] = [];
-        const langClassKeys = Object.keys(languages.languages);
+    if (to !== "pt-libras") {
 
-        langClassKeys.map( objKey => {
-            if ( typeof languages.languages[objKey] === "string"){
-                langsFrom.push({
-                    id: objKey,
-                    value: languages.languages[objKey]
-                } as ILanguageList);
-            }
+      response.data.translated = await translate(text, { from, to })
+        .catch((err: any) => {
+          return err;
         });
+    } else if (to === "pt-libras" && from === "pt") {
+      const responseLibras = await LibrasService.textToLibras(text);
 
-        langsTo = langsFrom;
-        langsTo.push({
-            id: "pt-libras",
-            value: "Língua Brasileira de Sinais (Libras)"
-        });
+      response.code = responseLibras.code;
 
-        const validLanguages = {
-            from: langsFrom,
-            to: langsTo
-        };
-
-
-        resp.status(200).json(validLanguages);
+      if (responseLibras.code === 200) {
+        response.data.translated = responseLibras.data.to;
+        response.data.libras = responseLibras.data
+      } else {
+        response.data = responseLibras.data;
+      }
+    } else {
+      response.code = 406,
+      response.data = { error: "Não é possível traduzir este idioma ainda :("}
     }
+
+    return response;
+  }
+
+  public async validLangs(req: Request, resp: Response) {
+    let response: IResp = {
+      code: 200,
+      data: {},
+    }
+
+    let langsTo: ILanguageList[] = [];
+    const langsFrom: ILanguageList[] = [];
+    const langClassKeys = Object.keys(languages.languages);
+
+    langClassKeys.map((objKey) => {
+      if (typeof languages.languages[objKey] === "string") {
+        langsFrom.push({
+          id: objKey,
+          value: languages.languages[objKey],
+        } as ILanguageList);
+      }
+    });
+
+    langsTo = langsFrom;
+    langsTo.push({
+      id: "pt-libras",
+      value: "Língua Brasileira de Sinais (Libras)",
+    });
+
+    response.data = {
+      from: langsFrom,
+      to: langsTo,
+    };
+
+    resp.status(response.code).json(response.data);
+  }
 }

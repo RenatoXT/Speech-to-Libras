@@ -47,6 +47,5 @@ export class UserService {
                 error: "Usuário não cadastrado",
             });
         }
-        
     };
-}
+}   

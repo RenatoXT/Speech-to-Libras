@@ -8,6 +8,13 @@ export interface ISign {
   mimetype: string;
   md5: string;
 }
+export interface ILibrasTranslation {
+	error?: boolean | string,
+	from: string,
+	to: any[],
+	phrases: string[]
+	translation: any[],
+}
 
 export class MongoSigns extends AbstractModel implements ISign  {
     name: string;

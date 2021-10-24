@@ -26,7 +26,7 @@ export default class LibrasTranslateDao {
         let findSign = await this.searchSign(newSign.name);
         let result;
 
-        if ( findSign ==  null || !findSign ) {
+        if ( findSign ==  null) {
             const dbResp = await signs.insertOne(newSign);
             result = dbResp
         } else {
@@ -39,21 +39,20 @@ export default class LibrasTranslateDao {
     }
 
     public static async getSign( name: string ) {
-        const searchRes = this.searchSign(name);
+        const searchRes = await this.searchSign(name);
         let result;
 
-        if ( searchRes == null || searchRes ) {
+        if ( searchRes == null ) {
             result =  {
                 error: "Sinal não encontrado!"
             }
         } else {
             result = searchRes;
         }
-
         return result;
     }
 
-    private static async searchSign( name: string ) {
+    public static async searchSign( name: string ) {
         try {
             let result = await signs.findOne({ "name": name });
     
@@ -67,11 +66,11 @@ export default class LibrasTranslateDao {
     public static async updateSign( params: ISign) {
         try {
             let result;
-            let findUser = await this.searchSign(params.name);
-
-            if ( findUser ){
+            let findSign = await this.searchSign(params.name);
+            
+            if ( findSign ){
                 const updateSign = new MongoSigns();
-                updateSign.assignValues(findUser);
+                updateSign.assignValues(findSign);
                 updateSign.assignValues(params);
     
     
@@ -80,9 +79,10 @@ export default class LibrasTranslateDao {
                     { "$set": updateSign }
                 );
             } else {
-                result =  {
-                    error: "O sinal não está cadastrado! Crie-o antes de tentar atualizar algo"
-                }
+                // Se o sinal não existem crie-o
+                //  // result =  { error: "O sinal não está cadastrado! Crie-o antes de tentar atualizar algo" }
+
+                result = await this.createSign(params);
             }
 
             return result;
@@ -95,9 +95,9 @@ export default class LibrasTranslateDao {
     public static async deleteSign( name: string ) {
         try {
             let result;
-            let findUser = await this.searchSign(name);
+            let findSign = await this.searchSign(name);
 
-            if ( findUser ){
+            if ( findSign ){
                 result = await signs.deleteOne({ "name": name });
             } else {
                 result =  {
