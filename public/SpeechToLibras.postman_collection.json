@@ -1,131 +1,451 @@
 {
 	"info": {
 		"_postman_id": "85722b4c-fbae-47e0-951e-1dcacdaec120",
-		"name": "SpeechToLibras",
+		"name": "Speech to Libras",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "User",
+			"name": "Production",
 			"item": [
 				{
-					"name": "Buscar Usuário",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/renatoxaviertavares1999@gmail.com",
-							"protocol": "https",
-							"host": [
-								"speech-to-libras",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"api",
-								"SpeechToLibras",
-								"v1",
-								"User",
-								"renatoxaviertavares1999@gmail.com"
-							],
-							"query": [
-								{
-									"key": null,
-									"value": "",
-									"disabled": true
+					"name": "User",
+					"item": [
+						{
+							"name": "Buscar Usuário",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/renatoxaviertavares1999@gmail.com",
+									"protocol": "https",
+									"host": [
+										"speech-to-libras",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"SpeechToLibras",
+										"v1",
+										"User",
+										"renatoxaviertavares1999@gmail.com"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": "",
+											"disabled": true
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Usuário",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"renatoxaviertavares1999@gmail.com\",\r\n        \"origin\": \"google\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/",
-							"protocol": "https",
-							"host": [
-								"speech-to-libras",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"api",
-								"SpeechToLibras",
-								"v1",
-								"User",
-								""
-							]
+						{
+							"name": "Update Usuário",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"email\": \"renatoxaviertavares1999@gmail.com\",\r\n        \"language\": \"portugues\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/",
+									"protocol": "https",
+									"host": [
+										"speech-to-libras",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"SpeechToLibras",
+										"v1",
+										"User",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Usuário",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/renatoxaviertavares1999@gmail.com",
+									"protocol": "https",
+									"host": [
+										"speech-to-libras",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"SpeechToLibras",
+										"v1",
+										"User",
+										"renatoxaviertavares1999@gmail.com"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Delete Usuário",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/User/renatoxaviertavares1999@gmail.com",
-							"protocol": "https",
-							"host": [
-								"speech-to-libras",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"api",
-								"SpeechToLibras",
-								"v1",
-								"User",
-								"renatoxaviertavares1999@gmail.com"
-							]
+					"name": "GoogleAuth",
+					"item": [
+						{
+							"name": "Sign-in Google",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/Auth/",
+									"protocol": "https",
+									"host": [
+										"speech-to-libras",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"SpeechToLibras",
+										"v1",
+										"Auth",
+										""
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
 		{
-			"name": "GoogleAuth",
+			"name": "Local",
 			"item": [
 				{
-					"name": "Sign-in Google",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://speech-to-libras.herokuapp.com/api/SpeechToLibras/v1/Auth/",
-							"protocol": "https",
-							"host": [
-								"speech-to-libras",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"api",
-								"SpeechToLibras",
-								"v1",
-								"Auth",
-								""
-							]
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Gera url de acesso",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/Auth",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[ Google ] Salva token de acesso",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/Auth/GoogleAuth",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Auth",
+										"GoogleAuth"
+									]
+								},
+								"description": "# Esta requisição é feita após a validação de acesso da google ( É um redirect pós validação ) e serve para salvar o token de acesso"
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Libras",
+					"item": [
+						{
+							"name": "Cadastrar Sinal",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "sign",
+											"type": "file",
+											"src": "/C:/Users/renat/OneDrive/Imagens/Capturas de tela/a.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{local_url}}/Libras/new/sign",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Libras",
+										"new",
+										"sign"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Sinal",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "sign",
+											"type": "file",
+											"src": "/C:/Users/renat/OneDrive/Imagens/Capturas de tela/a.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{local_url}}/Libras/sign/A",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Libras",
+										"sign",
+										"A"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Sinal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/Libras/sign/A",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Libras",
+										"sign",
+										"A"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Sinal",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/Libras/sign/A",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Libras",
+										"sign",
+										"A"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Translate",
+					"item": [
+						{
+							"name": "Traduzir",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"from\": \"es\",\r\n\t\"to\": \"pt\",\r\n\t\"text\": \"Yo soy renatito\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/Translate",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Translate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Traduzir - Libras",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"from\": \"pt\",\r\n\t\"to\": \"pt-libras\",\r\n\t\"text\": \"Ana Banana an\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/Translate",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Translate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Línguas Válidas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/Translate/Languages",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"Translate",
+										"Languages"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Buscar Usuário",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/User/renatoxaviertavares1999@gmail.com",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"User",
+										"renatoxaviertavares1999@gmail.com"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Usuário",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/User/renatoxaviertavares1999@gmail.com",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"User",
+										"renatoxaviertavares1999@gmail.com"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Usuário",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"user\": {\r\n\t\t\"email\": \"renatoxaviertavares1999@gmail.com\",\r\n\t\t\"photoUrl\": \"Param opcional\",\r\n\t\t\"gender\": \"Param opcional\",\r\n\t\t\"language\": \"Param opcional\",\r\n\t\t\"origin\": \"Param opcional\",\r\n\t\t\"name\": {\r\n\t\t\t\"displayName\": \"Param opcional\",\r\n\t\t\t\"familyName\": \"Param opcional\",\r\n\t\t\t\"givenName\": \"Param opcional\"\r\n\t\t},\r\n\t\t\"avatar\": {\r\n\t\t\t\"code\": 0\r\n\t\t}\r\n\t}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/User",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"User"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local_url",
+			"value": "http://localhost:3510/api/SpeechToLibras/v1"
 		}
 	]
 }
