@@ -28,5 +28,5 @@ jobs:
             ${{ runner.OS }}-
       - name: Install dependencies
         run: npm ci
-      - run: npm run build --if-present
+      - run: npm run postinstall --if-present
       - run: npm test

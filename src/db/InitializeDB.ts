@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import mongoose from 'mongoose';
 
 import LibrasTranslateDao from '../api/v1/Data/mongo/libras-translate.dao';
 import UsersDao from '../api/v1/Data/mongo/users.dao';
@@ -7,7 +6,6 @@ import UsersDao from '../api/v1/Data/mongo/users.dao';
 import Config from '../constants/constants';
 
 export class InitializeDB {
-    // Transformar tudo em Mongoose 
     static clientOptions = { 
         maxPoolSize: 5, 
         wtimeoutMS: 2500 
