@@ -9,7 +9,8 @@ export default class Config {
     public static ENVIRONMENT = process.env.ENVIRONMENT || "prod"
 
     public static APPLICATION_NAME = process.env.APPNAME;
-    public static DEFAULT_ROUTE_NAME = `/api/${Config.APPLICATION_NAME}/v1`;
+    // public static DEFAULT_ROUTE_NAME = `/api/${Config.APPLICATION_NAME}/v1`;
+    public static DEFAULT_ROUTE_NAME = `/v1`;
 
     public static GoogleConfig = {
         ClientId : process.env.ClientId,
