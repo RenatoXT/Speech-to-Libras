@@ -191,10 +191,11 @@ export class LibrasService {
                 if (translation.error == undefined) {
                   const searchChar = await LibrasTranslateDao.searchSign(char);
 
-                  translationResult.push(searchChar);
-
+                  
                   if (searchChar === null) {
                     translation.error = `Não foi possível traduzir, solicite a tradução da palavra: ${phrase}`;
+                  } else {
+                    translationResult.push(searchChar);
                   }
                 }
               })
