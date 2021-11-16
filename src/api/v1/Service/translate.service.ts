@@ -52,7 +52,7 @@ export class TranslateService {
 
       if (responseLibras.code === 200) {
         response.data.translated = responseLibras.data.to;
-        response.data.libras = responseLibras.data
+        response.data.libras = true; //responseLibras.data
       } else {
         response.data = responseLibras.data;
       }
