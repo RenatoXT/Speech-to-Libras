@@ -24,10 +24,6 @@ export class CommonMiddleware {
         this.app.use(morgan('tiny'))
     }
 
-    public async templateEngine() {
-        this.app.set("view engine", "ejs");
-    }
-
     public async useFileUpload() {
         this.app.use(fileUpload({
             crateParentPath: true

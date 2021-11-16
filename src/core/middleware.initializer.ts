@@ -12,7 +12,7 @@ export class InitializeMiddleware {
         await middleware.useFileUpload();
         await middleware.logRequests();
         // await middleware.logRequests();
-        await middleware.templateEngine();
+        // await middleware.templateEngine();
     }
     
     public static async InitializeErrorHandlingMiddleware(app: Express) {
