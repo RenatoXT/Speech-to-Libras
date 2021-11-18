@@ -1,9 +1,10 @@
 import { AbstractRouteController } from "../../routes/abstract-route.entity";
 
-import { UserController } from './Interface/user.controller';
-import { AuthController } from "./Interface/auth.controller";
-import { TranslateController } from "./Interface/translate.controller";
-import { LibrasTranslateController } from './Interface/libras-translate.controller';
+
+import { UserController } from "./Application/user.controller";
+import { AuthController } from "./Application/auth.controller";
+import { TranslateController } from "./Application/translate.controller";
+import { LibrasTranslateController } from './Application/libras-translate.controller';
 
 
 export function getAllRoutes(): Promise<Array<AbstractRouteController>> {

@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 
 import UsersDao from "../Data/mongo/users.dao";
 
+// TODO Liberar as funções de acordo com o token do usuário!
+// TODO Utilização do JWT
 export class UserService {
-    // TODO Liberar as funções de acordo com o token do usuário!
 
     public async getUser(req: Request, resp: Response) {
         const { email } = req.params;

@@ -7,6 +7,7 @@ import { ILanguageList, IResp } from "../Entities/response.entities"
 const translate = require("translate-google");
 const languages = require("translate-google");
 
+// TODO Criar ENUM com os códigos de retorno
 export class TranslateService {
   public async translateTo(req: Request, resp: Response) {
     let { from, to, text } = req.body;

@@ -5,6 +5,8 @@ import { generateSignInUrl, getGoogleAccountFromCode } from "../../../utils/goog
 import UsersDao from "../Data/mongo/users.dao";
 import { MongoUser } from "../Entities/mongo-user.entities";
 
+// TODO Padronizar os retornos do banco para o mesmo padrão da service de tradução
+
 export class AuthService {
     /**
      * Generate a sign-in url for google access

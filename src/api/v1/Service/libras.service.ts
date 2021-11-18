@@ -6,6 +6,8 @@ import LibrasTranslateDao from "../Data/mongo/libras-translate.dao";
 import { IResp } from './../Entities/response.entities';
 import { ILibrasTranslation, ISign } from "./../Entities/mongo-libras.entities";
 
+// TODO Criar ENUM com os códigos de retorno
+
 export class LibrasService {
   
   public static async textToLibras(text: string) {
@@ -215,16 +217,6 @@ export class LibrasService {
 
     // Dá um flat para ter todas as traduções em um único array
     translation.to = translation.error == undefined ? translation.translation.flat(1) : [];
-
-    // console.log({
-    //   application: "speech-to-libras-backend",
-    //   origin: "libras-service",
-    //   error: translation.error,
-    //   translation: translation.translation,
-    //   "final-value": translation.to,
-    //   "original-value": translation,
-    // })
-
     return translation;
   }
 
