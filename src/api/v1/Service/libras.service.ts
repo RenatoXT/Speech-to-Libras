@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import LibrasTranslateDao from "../Data/mongo/libras-translate.dao";
 
 import { IResp } from './../Entities/response.entities';
-import { ILibrasTranslation } from "./../Entities/mongo-libras.entities";
+import { ILibrasTranslation, ISign } from "./../Entities/mongo-libras.entities";
 
 export class LibrasService {
   
@@ -168,19 +168,22 @@ export class LibrasService {
       translation: [] as any,
     };
 
+    const order: string[] = [];
+
     // Realiza a interação entre todas as frases
     // Utiliza o promise all para esperar o retorno de todas as requests
     translation.translation = await Promise.all(
       translation.phrases.map(async (phrase: string) => {
         if (translation.error == undefined) {
-          const translationResult: any[] = [];
+          let translationResult: ISign[] = [];
 
           const searchPhrase = await LibrasTranslateDao.searchSign(phrase);
 
           // Se a frase existe na database, utilize este valor para a tradução
           // caso contrário, quebre a frase em chars e busque-os
           if (searchPhrase !== null) {
-            translationResult.push(searchPhrase);
+            order.push(phrase);
+            translationResult.push(searchPhrase as ISign);
           } else {
             const phraseChars = Array.from(phrase);
 
@@ -189,19 +192,20 @@ export class LibrasService {
             await Promise.all(
               phraseChars.map(async (char: string) => {
                 if (translation.error == undefined) {
+                  order.push(char);
                   const searchChar = await LibrasTranslateDao.searchSign(char);
 
-                  
                   if (searchChar === null) {
                     translation.error = `Não foi possível traduzir, solicite a tradução da palavra: ${phrase}`;
                   } else {
-                    translationResult.push(searchChar);
+                    translationResult.push(searchChar as ISign);
                   }
                 }
               })
             );
           }
 
+          translationResult = this.orderQueue(order, translationResult);
           return translationResult;
         }
 
@@ -222,6 +226,21 @@ export class LibrasService {
     // })
 
     return translation;
+  }
+
+  private static orderQueue( order: string[], translation: ISign[]) {
+    const orderedQueue: ISign[] = [];
+
+    order.map( ( ordIndex ) => {
+        const transIndex = translation.findIndex((element, index) => {
+            return element.name === ordIndex
+        });
+        
+        orderedQueue.push(translation.splice(transIndex, 1)[0]);
+        
+    });
+
+    return orderedQueue;
   }
 
 	private static validateFile(file: any) {

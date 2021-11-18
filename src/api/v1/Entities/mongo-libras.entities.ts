@@ -1,6 +1,7 @@
 import { AbstractModel } from "../../../db/abstract-model.entity";
 
 export interface ISign {
+  _id?: any;
   name: string;
   data: string;
   size: number;

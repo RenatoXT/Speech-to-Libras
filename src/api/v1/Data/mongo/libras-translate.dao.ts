@@ -55,6 +55,9 @@ export default class LibrasTranslateDao {
     public static async searchSign( name: string ) {
         try {
             let result = await signs.findOne({ "name": name });
+
+            if ( result )
+                result.data = "teste"
     
             return result;
         } catch ( err ) {
