@@ -220,6 +220,7 @@ export class LibrasService {
     return translation;
   }
 
+  // TODO melhorar a tratativa! 
   private static orderQueue( order: string[], translation: ISign[]) {
     const orderedQueue: ISign[] = [];
 
