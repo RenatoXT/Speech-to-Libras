@@ -56,9 +56,6 @@ export default class LibrasTranslateDao {
         try {
             let result = await signs.findOne({ "name": name });
 
-            if ( result )
-                result.data = "teste"
-    
             return result;
         } catch ( err ) {
             const msg = (err as Error).message;
