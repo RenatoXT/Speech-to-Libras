@@ -166,7 +166,8 @@ export class LibrasService {
       error: undefined,
       from: transpiled.toLowerCase(),
       to: [] as any[],
-      phrases: transpiled.toUpperCase().trim().replace(" ", " [ESPACO] ").split(" "),
+      // phrases: transpiled.toUpperCase().trim().replace(" ", " [ESPACO] ").split(" "),
+      phrases: transpiled.toUpperCase().trim().split(" "),
       translation: [] as any,
     };
 
