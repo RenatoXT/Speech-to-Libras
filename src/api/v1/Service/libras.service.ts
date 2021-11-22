@@ -172,13 +172,13 @@ export class LibrasService {
     };
 
     const order: string[] = [];
+    let translationResult: ISign[] = [];
 
     // Realiza a interação entre todas as frases
     // Utiliza o promise all para esperar o retorno de todas as requests
     translation.translation = await Promise.all(
       translation.phrases.map(async (phrase: string) => {
         if (translation.error == undefined) {
-          let translationResult: ISign[] = [];
 
           const searchPhrase = await LibrasTranslateDao.searchSign(phrase);
 
@@ -207,7 +207,6 @@ export class LibrasService {
               })
             );
           }
-
           translationResult = this.orderQueue(order, translationResult);
           return translationResult;
         }
@@ -229,8 +228,10 @@ export class LibrasService {
         const transIndex = translation.findIndex((element, index) => {
             return element.name === ordIndex
         });
-        
-        orderedQueue.push(translation.splice(transIndex, 1)[0]);
+        let splitado = translation.splice(transIndex, 1)[0]
+        if(splitado != null) {
+          orderedQueue.push(splitado);
+        }
         
     });
 
